@@ -61,7 +61,7 @@ if __name__ == '__main__':
 s = socket.socket()
 s. settimeout(10)
 
-logging.basicConfig(filename='example.log',level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG)
 
 def ping(host):
     result = subprocess.call(["ping","-c","1",host],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
