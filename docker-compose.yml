@@ -1,0 +1,5 @@
+version: '3'
+services:
+  vpn_nat:
+    build: Dockerfile
+    command: python netcat.py -d "Example connection" -p 8310 -gw 10.99.132.110 10.206.70.213
