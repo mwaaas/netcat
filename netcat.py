@@ -73,25 +73,26 @@ def ping(host):
     elif result == 2:
         logging.error("CANARY: Gateway to=%s%s status=0 exception='Ping timed out'" % (args.gateway, description))
 
-try:
-    s.connect((args.ip, args.port))
-except Exception as e:
-    alerttext = "CANARY: Endpoint to=%s:%s%s status=0 exception='%s'" % (args.ip, args.port, description, str(e))
-
-if not args.gateway == None:
+while True:
     try:
-        ping(args.gateway)
+        s.connect((args.ip, args.port))
     except Exception as e:
-        if args.description == None:
-            description = " name=VPN"
-        alerttext = "CANARY: Endpoint to=%s%s status=0 exception='%s'" % (args.gateway, description, e)
+        alerttext = "CANARY: Endpoint to=%s:%s%s status=0 exception='%s'" % (args.ip, args.port, description, str(e))
+
+    if not args.gateway == None:
+        try:
+            ping(args.gateway)
+        except Exception as e:
+            if args.description == None:
+                description = " name=VPN"
+            alerttext = "CANARY: Endpoint to=%s%s status=0 exception='%s'" % (args.gateway, description, e)
 
 
-if 'alerttext' in locals():
-    print(alerttext)
-    logging.error(alerttext)
-else:
-    infotext = "CANARY: Endpoint to=%s:%s%s status=1" % (args.ip, args.port, description)
-    print(infotext)
-    logging.warning(infotext)
+    if 'alerttext' in locals():
+        print(alerttext)
+        logging.error(alerttext)
+    else:
+        infotext = "CANARY: Endpoint to=%s:%s%s status=1" % (args.ip, args.port, description)
+        print(infotext)
+        logging.warning(infotext)
 
