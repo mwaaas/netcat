@@ -17,6 +17,8 @@ Example usage: python netcat.py -d "Example connection" -p 8310 -gw 10.99.132.11
 
 """#
 import argparse
+from time import sleep
+
 import argparse_actions
 import socket
 import logging
@@ -50,6 +52,9 @@ if __name__ == '__main__':
     parser.add_argument(
         "-d", "--description", dest="description",
         help="Alarm description", required=False)
+    parser.add_argument('-t', '--time',
+                        help="This is the time to sleep before making another call",
+                        required=False, default=3, type=int)
 
     args=parser.parse_args()
 
@@ -95,4 +100,7 @@ while True:
         infotext = "CANARY: Endpoint to=%s:%s%s status=1" % (args.ip, args.port, description)
         print(infotext)
         logging.warning(infotext)
+
+        sleep(seconds=args.seconds)
+
 
