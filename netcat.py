@@ -63,9 +63,6 @@ if __name__ == '__main__':
     else:
         description = " name=" + args.description
 
-s = socket.socket()
-s. settimeout(10)
-
 logging.basicConfig(level=logging.DEBUG)
 
 def ping(host):
@@ -79,6 +76,8 @@ def ping(host):
         logging.error("CANARY: Gateway to=%s%s status=0 exception='Ping timed out'" % (args.gateway, description))
 
 while True:
+    s = socket.socket()
+    s.settimeout(10)
     try:
         s.connect((args.ip, args.port))
     except Exception as e:
