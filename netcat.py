@@ -101,6 +101,6 @@ while True:
         print(infotext)
         logging.warning(infotext)
 
-        sleep(seconds=args.seconds)
+    sleep(seconds=args.seconds)
 
 
