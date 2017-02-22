@@ -100,6 +100,8 @@ while True:
         print(infotext)
         logging.warning(infotext)
 
-    sleep(seconds=args.seconds)
+    logging.info('sleep {}'.format(args.time))
+    sleep(args.time)
+
 
 
