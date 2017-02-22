@@ -99,7 +99,7 @@ while True:
         infotext = "CANARY: Endpoint to=%s:%s%s status=1" % (args.ip, args.port, description)
         print(infotext)
         logging.warning(infotext)
-
+    s.close()
     logging.info('sleep {}'.format(args.time))
     sleep(args.time)
 
